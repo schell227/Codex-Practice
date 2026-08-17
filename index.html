@@ -5,23 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hello World</title>
   <style>
+    :root {
+      --background-start: #4f46e5;
+      --background-end: #06b6d4;
+    }
+
     body {
       min-height: 100vh;
       margin: 0;
       display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      background: linear-gradient(135deg, var(--background-start), var(--background-end));
       color: #ffffff;
       font-family: Arial, sans-serif;
+      transition: background 0.4s ease;
     }
 
     h1 {
       font-size: 4rem;
+      margin: 0;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.85rem 1.4rem;
+      color: #1f2937;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    button:hover,
+    button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.25);
     }
   </style>
 </head>
 <body>
   <h1>Hello World</h1>
+  <button type="button" id="colorButton">Change background</button>
+
+  <script>
+    const colorButton = document.querySelector('#colorButton');
+    const colorPairs = [
+      ['#4f46e5', '#06b6d4'],
+      ['#f97316', '#db2777'],
+      ['#16a34a', '#84cc16'],
+      ['#7c3aed', '#f43f5e']
+    ];
+    let colorIndex = 0;
+
+    colorButton.addEventListener('click', () => {
+      colorIndex = (colorIndex + 1) % colorPairs.length;
+      const [startColor, endColor] = colorPairs[colorIndex];
+
+      document.documentElement.style.setProperty('--background-start', startColor);
+      document.documentElement.style.setProperty('--background-end', endColor);
+    });
+  </script>
 </body>
 </html>
